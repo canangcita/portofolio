@@ -21,7 +21,7 @@
           transform: translate(0px, 0px);
 }
 #baris1kolom2 {
-  left: 80%;
+  right: 40%;
   top: 75%;
   z-index: 4;
   width: 25%;
@@ -42,7 +42,8 @@
   width: 25%;
   min-height: 6.5em;
   margin: 1rem 0 0 1rem;
-  color: white;
+  color: black;
+  align-content: center;
   border-radius: 0.5em;
   padding: 1%;
   touch-action: none;
