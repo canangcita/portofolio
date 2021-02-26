@@ -1,0 +1,86 @@
+<<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <script type="module">
+import 'https://cdn.interactjs.io/v1.9.20/auto-start/index.js'
+import 'https://cdn.interactjs.io/v1.9.20/actions/drag/index.js'
+import 'https://cdn.interactjs.io/v1.9.20/actions/resize/index.js'
+import 'https://cdn.interactjs.io/v1.9.20/modifiers/index.js'
+import 'https://cdn.interactjs.io/v1.9.20/dev-tools/index.js'
+import interact from 'https://cdn.interactjs.io/v1.9.20/interactjs/index.js'
+interact('.draggable')
+  .draggable({
+    // enable inertial throwing
+    inertia: true,
+    // keep the element within the area of it's parent
+    modifiers: [
+      interact.modifiers.restrictRect({
+        restriction: 'parent',
+        endOnly: true
+      })
+    ],
+    // enable autoScroll
+    autoScroll: true,
+
+    listeners: {
+      // call this function on every dragmove event
+      move: dragMoveListener,
+
+      // call this function on every dragend event
+      end (event) {
+        var textEl = event.target.querySelector('p')
+
+        textEl
+      }
+    }
+  })
+
+function dragMoveListener (event) {
+  var target = event.target
+  // keep the dragged position in the data-x/data-y attributes
+  var x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx
+  var y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy
+
+  // translate the element
+  target.style.webkitTransform =
+    target.style.transform =
+      'translate(' + x + 'px, ' + y + 'px)'
+
+  // update the posiion attributes
+  target.setAttribute('data-x', x)
+  target.setAttribute('data-y', y)
+}
+
+// this function is used later in the resizing and gesture demos
+window.dragMoveListener = dragMoveListener
+</script>
+
+<link rel="stylesheet" type="text/css" href="style.css" media="screen" />
+
+<title>Test</title>
+</head>
+
+  <body>
+    <div class="fadein">
+      <div id="container" oncontextmenu="return false;">
+
+    <div id="baris1" class="draggable">
+      <img src="https://xxxxizzy.xyz/portfolio/adam.jpg" />
+      <p align="center">heavily inspired by the cloudy and stormy weather in jakarta lately,
+      death stranding, tenki no ko, and many of my favorite illustrators.</p>
+
+
+    </div>
+    <div id="baris2" class="draggable">
+      <video autoplay="true" loop="true" muted="true" playsinline>
+            <source src="https://xxxxizzy.xyz/portfolio/giselmask_small.mp4" type="video/mp4" />
+            oopsie u can't see an MP4 :(
+          </video>
+    </div>
+</div>
+</div>
+  </body>
+
+
+</html>
